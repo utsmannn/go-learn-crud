@@ -3,5 +3,5 @@ RUN apk update && apk add --no-cache git
 WORKDIR /app
 COPY . .
 RUN go mod tidy
-RUN go build -0 binary
+RUN go build -o binary
 ENTRYPOINT ["/app/binary"]
