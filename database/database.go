@@ -9,7 +9,7 @@ import (
 )
 
 func connect() *sql.DB {
-	url := "admin:1234@tcp(localhost:8889)/test_crud"
+	url := "user:1234utsman@tcp(192.168.1.17:3306)/test_crud"
 	db, err := sql.Open("mysql", url)
 	if err != nil {
 		panic(err.Error())
@@ -29,6 +29,7 @@ func GetAll() ([]data.Student, error) {
 	student := data.Student{}
 	students := []data.Student{}
 
+	fmt.Println("start query")
 	for query.Next() {
 		var id int
 		var name string
@@ -83,6 +84,8 @@ func GetById(id string) ([]data.Student, error) {
 
 func Insert(student data.Student) error {
 	db := connect()
+	fmt.Println("insert started")
+
 	query, err := db.Prepare("insert into student(name, age) values(?,?)")
 	if err != nil {
 		panic(err.Error())
